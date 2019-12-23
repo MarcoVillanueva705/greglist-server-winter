@@ -11,7 +11,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     cars: [],
-    activeCar: {}
+    activeCar: {},
+    houses:[],
+    activeHouse: {}
   },
   mutations: {
     setAllCars(state, data) {
@@ -22,6 +24,15 @@ export default new Vuex.Store({
     },
     setActiveCar(state, car) {
       state.activeCar = car;
+    },
+    setAllHouses(state, data) {
+      state.houses = data;
+    },
+    addHouse(state, house) {
+      state.houses.push(house);
+    },
+    setActiveHouse(state, house) {
+      state.activeHouse = house;
     }
   },
   actions: {
@@ -42,6 +53,24 @@ export default new Vuex.Store({
     async sold({ commit, dispatch }, id) {
       await _api.delete("cars/" + id);
       dispatch("getCars");
+    },
+
+
+    async getHouses({ commit, dispatch }) {
+      let res = await _api.get("houses");
+      commit("setAllHouses", res.data);
+    },
+    async getHouseById({ commit, dispatch }, id) {
+      let res = await _api.get("houses/" + id);
+      commit("setActiveHouse", res.data);
+    },
+    async createHouse({ commit, dispatch }, house) {
+      let res = await _api.post("houses", house);
+      commit("addHouse", res.data);
+    },
+    async soldHouse({ commit, dispatch }, id) {
+      await _api.delete("houses/" + id);
+      dispatch("getHouses");
     }
   }
 });

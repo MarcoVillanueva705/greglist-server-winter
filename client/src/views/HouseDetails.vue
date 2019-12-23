@@ -1,5 +1,5 @@
 <template>
-  <div  lass="car-details container-fluid">
+  <div  lass="house-details container-fluid">
     <header class="row">
       <div class="col-lg-6">
         <router-link :to="{ name: 'cars' }">
@@ -12,21 +12,21 @@
         </router-link>
       </div>
     </header>
-    <h3>{{ car.make }}</h3>
-    <h3>{{ car.year }}</h3>
-     <img :src="car.imgUrl" />
+    <h3>{{ house.neighborhood }}</h3>
+    <h3>{{ house.year }}</h3>
+     <img :src="house.imgUrl" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "CarDetails",
+  name: "HouseDetails",
   mounted() {
-    this.$store.dispatch("getCarById", this.$route.params.id);
+    this.$store.dispatch("getHouseById", this.$route.params.id);
   },
   computed: {
-    car() {
-      return this.$store.state.activeCar;
+    house() {
+      return this.$store.state.activeHouse;
     }
   }
 };
