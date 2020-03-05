@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const Car = new Schema(
+const House = new Schema(
   {
-    make: { type: String, required: true, maxlength: 20 },
-    model: { type: String, required: true },
+    neighborhood: { type: String, required: true, maxlength: 20 },
     price: { type: Number, required: true },
     year: { type: Number, max: 2040, min: 1800 },
     imgUrl: { type: String},
@@ -14,4 +13,4 @@ const Car = new Schema(
   { timestamps: true, toJSON: { virtuals: true } }
 );
 
-export default Car;
+export default House;
